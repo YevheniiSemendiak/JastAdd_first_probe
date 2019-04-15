@@ -1,0 +1,8 @@
+aspect Analysis {
+
+  coll java.util.Set<Def> Root.unusedDefs() [new java.util.HashSet<Def>()] with add root Root;
+  // TODO contribution statement
+
+  // TODO additional helper attribute may be needed!
+
+}

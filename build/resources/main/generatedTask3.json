@@ -1,0 +1,44 @@
+{
+  "c": {
+    "Def": {
+      "k": "List",
+      "c": [
+        {"c": {"Name": {"k": "t", "t": "String", "v": "a"}, "Value": {"k": "t", "t": "float", "v": -0.5 } }, "k": "NT", "t": "Def"},
+        {"c": {"Name": {"k": "t", "t": "String", "v": "z"}, "Value": {"k": "t", "t": "float", "v": 2.5 } }, "k": "NT", "t": "Def"},
+        {"c": {"Name": {"k": "t", "t": "String", "v": "b"}, "Value": {"k": "t", "t": "float", "v": 4 } }, "k": "NT", "t": "Def"}
+      ]
+    },
+    "Exp": {
+        "c": {
+          "A": {
+            "c": {
+              "A": {"c": {"Value": {"k": "t", "t": "float", "v": 3.0 } }, "k": "NT", "t": "Number"},
+              "B": {"c": {"Value": {"k": "t", "t": "float", "v": 7.0 } }, "k": "NT", "t": "Number"}
+            },
+            "k": "NT", "t": "AddExp"
+          },
+          "B": {
+            "c": {
+              "A": {"c": {"Name": {"k": "t", "t": "String", "v": "z"} }, "k": "NT", "t": "Var"},
+              "B": {
+                "c": {
+                  "A": {
+                    "c": {
+                      "Exp": {"c": {"Value": {"k": "t", "t": "float", "v": 1.0 } }, "k": "NT", "t": "Number"}
+                    },
+                    "k": "NT",
+                    "t": "UnaryMinusExp"
+                  },
+                  "B": {"c": {"Value": {"k": "t", "t": "float", "v": 1.0 } }, "k": "NT", "t": "Number"}
+                },
+                "k": "NT", "t": "AddExp"
+              }
+            },
+            "k": "NT", "t": "MulExp"
+          }
+        },
+        "k": "NT", "t": "AddExp"
+      }
+  },
+  "k": "NT", "t": "Root"
+}

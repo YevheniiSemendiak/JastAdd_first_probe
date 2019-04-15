@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: jackson-databind-2.8.8.1.jar beaver-rt-0.9.11.jar jackson-
+ annotations-2.8.0.jar jackson-core-2.8.8.jar
+Main-Class: de.tudresden.inf.st.most.ExerciseMain
+

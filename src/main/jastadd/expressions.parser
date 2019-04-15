@@ -1,0 +1,28 @@
+%header {:
+ package de.tudresden.inf.st.most.jastadd.parser;
+ import de.tudresden.inf.st.most.jastadd.ast.*;
+:};
+
+%goal goal;
+
+expressions goal =
+    exp                              {: return new Root(new List<Def>(), exp); :}
+  | def_list exp                     {: return new Root(def_list, exp); :}
+  ;
+
+List def_list =
+    def                              {: return new List().add(def); :}
+  | def_list def                     {: return def_list.add(def); :}
+  ;
+
+Def def =
+    IDENTIFIER EQUALS MINUS NUMBER NEWLINE {: return new Def((String)IDENTIFIER.value, -Float.parseFloat((String)NUMBER.value)); :}
+  | IDENTIFIER EQUALS NUMBER NEWLINE {: return new Def((String)IDENTIFIER.value, Float.parseFloat((String)NUMBER.value)); :}
+  ;
+
+Exp exp =
+    LP exp.a PLUS exp.b RP           {: return new AddExp(a, b); :}
+  | LP exp.a MULT exp.b RP           {: return new MulExp(a, b); :}
+  | NUMBER                           {: return new de.tudresden.inf.st.most.jastadd.ast.Number(Float.parseFloat((String)NUMBER.value)); :}
+  | IDENTIFIER                       {: return new Var((String)IDENTIFIER.value); :}
+  ;

@@ -1,0 +1,17 @@
+aspect Optimization {
+
+  // rewrite Exp {
+  // when ( /* condition */ )
+  //   to Number {
+  //     // ...
+  //   }
+  // }
+
+  // rewrite MulExp {
+  //   when ( /* condition */ )
+  //   to Number {
+  //     // ...
+  //   }
+  // }
+
+}

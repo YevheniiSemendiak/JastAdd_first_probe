@@ -1,0 +1,72 @@
+{
+  "c": {
+    "Def": {
+      "k": "List",
+      "c": [
+        {
+          "c": {
+            "Name": {
+              "k": "t",
+              "t": "String",
+              "v": "z"
+            },
+            "Value": {
+              "k": "t",
+              "t": "float",
+              "v": 2.5
+            }
+          },
+          "k": "NT",
+          "t": "Def"
+        }
+      ]
+    },
+    "Exp": {
+        "c": {
+          "A": {
+            "c": {
+              "A": {
+                "c": {
+                  "Value": {
+                    "k": "t",
+                    "t": "float",
+                    "v": 3.0
+                  }
+                },
+                "k": "NT",
+                "t": "Number"
+              },
+              "B": {
+                "c": {
+                  "Value": {
+                    "k": "t",
+                    "t": "float",
+                    "v": 7.0
+                  }
+                },
+                "k": "NT",
+                "t": "Number"
+              }
+            },
+            "k": "NT",
+            "t": "AddExp"
+          },
+          "B": {
+                "c": {
+                  "Value": {
+                    "k": "t",
+                    "t": "float",
+                    "v": 2.0
+                  }
+                },
+                "k": "NT",
+                "t": "Number"
+              }
+        },
+        "k": "NT",
+        "t": "MulExp"
+      }
+  },
+  "k": "NT",
+  "t": "Root"
+}

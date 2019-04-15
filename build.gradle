@@ -1,0 +1,92 @@
+group 'de.tudresden.inf.st'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'jastadd'
+apply plugin: 'application'
+
+mainClassName = 'de.tudresden.inf.st.most.ExerciseMain'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.8.1'
+    compile group: 'net.sf.beaver', name: 'beaver-rt', version: '0.9.11'
+    testCompile 'junit:junit:4.12'
+    testCompile files('libs/DrAST-1.2.2.jar')
+
+    testCompile fileTree(dir: "${System.properties['java.home']}", include: '**/jfxrt.jar')
+}
+
+buildscript {
+    repositories.mavenLocal()
+    repositories.mavenCentral()
+    dependencies {
+        classpath 'org.jastadd:jastaddgradle:1.10.3'
+    }
+}
+
+
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'de.tudresden.inf.st.most.ExerciseMain'
+    )
+  }
+}
+
+javadoc {
+    // this is only run to get the index file etc.
+    failOnError = false
+}
+
+task DrAST(type: JavaExec, dependsOn:jar) {
+    group = "verification"
+    description = 'run the DrAST visual debugger tool'
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'de.tudresden.inf.st.most.DrAstRunner'
+}
+
+task RagDoll(type: Javadoc, dependsOn:javadoc) {
+    doFirst {
+        options.addStringOption("ragroot", "./src/main/jastadd")
+    }
+    group = "documentation"
+    description = 'create a RagDoll documentation'
+    classpath = javadoc.classpath
+    destinationDir = javadoc.destinationDir
+    excludes = javadoc.excludes
+    executable = javadoc.executable
+    failOnError = false
+    includes = javadoc.includes
+    options.doclet = "ragdoll.RagDollDoclet"
+    options.docletpath = files('libs/RagDoll.jar').asList()
+
+    source = javadoc.source
+    options.linkSource = true
+
+    // title not working for some reason
+    title = ""
+
+}
+
+jastadd {
+    configureModuleBuild()
+    modules "jastadd_modules"
+
+    module = "expressions"
+
+    astPackage = 'de.tudresden.inf.st.most.jastadd.ast'
+    genDir = 'src/gen/java'
+
+    buildInfoDir = 'src/gen-res'
+    parser.name = 'ExpressionParser'
+
+    scanner.genDir = "src/gen/java/de/tudresden/inf/st/most/jastadd/scanner"
+    parser.genDir = "src/gen/java/de/tudresden/inf/st/most/jastadd/parser"
+}
