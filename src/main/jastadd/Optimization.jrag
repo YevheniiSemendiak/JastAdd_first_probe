@@ -1,17 +1,25 @@
 aspect Optimization {
 
-  // rewrite Exp {
-  // when ( /* condition */ )
-  //   to Number {
-  //     // ...
-  //   }
-  // }
+  rewrite Exp {
+   when (isConstantSubtree() && !(this instanceof Number))
+    to Number {return new Number(eval());}
+  }
 
-  // rewrite MulExp {
-  //   when ( /* condition */ )
-  //   to Number {
-  //     // ...
-  //   }
-  // }
+  syn boolean Exp.isConstantSubtree() = !containsVariable();
+  syn boolean Exp.containsVariable();
+  eq BinExp.containsVariable() = getA().containsVariable() | getB().containsVariable();
+  eq UExp.containsVariable() = getA().containsVariable();
+  eq Number.containsVariable() = false;
+  eq Var.containsVariable() = true;
+
+  rewrite MulExp {
+      when (isMulWithZero())
+      to Number {return new Number(0);}
+    }
+
+  syn boolean MulExp.isMulWithZero();
+  eq MulExp.isMulWithZero(){
+   return getA().eval() == 0 | getB().eval() == 0;
+  }
 
 }
