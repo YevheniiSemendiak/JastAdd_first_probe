@@ -1,8 +1,25 @@
 aspect Analysis {
 
-  coll java.util.Set<Def> Root.unusedDefs() [new java.util.HashSet<Def>()] with add root Root;
-  // TODO contribution statement
+  coll java.util.Set<Def> Root.unusedDefs()
+    [new java.util.HashSet<Def>()] with add
+    root Root;
 
-  // TODO additional helper attribute may be needed!
+  Def contributes this
+    when !inExpression()
+    to Root.unusedDefs()
+    for theRoot();
 
+  // theRoot attribute for the Def AST
+  inh Root Def.theRoot();
+  eq Root.getDef(int i).theRoot() = this;
+
+  // inExpression attribute for the Def AST
+  inh boolean Def.inExpression();
+  eq Root.getDef(int i).inExpression() = getExp().defUsedInSubtree(getDef(i).getName());
+
+  // Helper attribute defUsedInSubtree for the Exp AST
+  syn boolean Exp.defUsedInSubtree(String name) = false;
+  eq BinExp.defUsedInSubtree(String name) = getA().defUsedInSubtree(name) || getB().defUsedInSubtree(name);
+  eq UExp.defUsedInSubtree(String name) = getA().defUsedInSubtree(name);
+  eq Var.defUsedInSubtree(String name) = this.getName().equals(name);
 }
