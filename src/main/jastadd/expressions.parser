@@ -22,7 +22,10 @@ Def def =
 
 Exp exp =
     LP exp.a PLUS exp.b RP           {: return new AddExp(a, b); :}
+  | LP exp.a MINUS exp.b RP          {: return new MinusExp(a, b); :}
+  | LP MINUS exp.a RP               {: return new UnaryMinusExp(a); :}
   | LP exp.a MULT exp.b RP           {: return new MulExp(a, b); :}
+  | LP exp.a DIV exp.b RP            {: return new DivExp(a, b); :}
   | NUMBER                           {: return new de.tudresden.inf.st.most.jastadd.ast.Number(Float.parseFloat((String)NUMBER.value)); :}
   | IDENTIFIER                       {: return new Var((String)IDENTIFIER.value); :}
   ;

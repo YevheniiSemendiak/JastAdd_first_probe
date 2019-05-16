@@ -4,6 +4,7 @@ abstract Exp ;
 abstract BinExp:Exp ::= A:Exp B:Exp ;
 abstract UExp:Exp ::= A:Exp;
 AddExp:BinExp ;
+MinusExp:BinExp ;
 MulExp:BinExp ;
 DivExp:BinExp ;
 UnaryMinusExp:UExp ;

@@ -43,6 +43,7 @@ Number = [:digit:]+ | [:digit:]+ "." [:digit:]* | "." [:digit:]+
 "="           { return sym(Terminals.EQUALS); }
 "+"           { return sym(Terminals.PLUS); }
 "*"           { return sym(Terminals.MULT); }
+"/"           { return sym(Terminals.DIV); }
 "-"           { return sym(Terminals.MINUS); }
 "("           { return sym(Terminals.LP); }
 ")"           { return sym(Terminals.RP); }
