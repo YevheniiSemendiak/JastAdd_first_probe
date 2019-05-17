@@ -1,7 +1,7 @@
 aspect Optimization {
 
   rewrite Exp {
-   when (isConstantSubtree() && !(this instanceof Number))
+   when (isConstantSubtree() && !isNumber())
     to Number {return new Number(eval());}
   }
 
@@ -11,6 +11,9 @@ aspect Optimization {
   eq UExp.containsVariable() = getA().containsVariable();
   eq Number.containsVariable() = false;
   eq Var.containsVariable() = true;
+
+  syn boolean Exp.isNumber() = false;
+  eq Number.isNumber() = true;
 
   rewrite MulExp {
       when (isMulWithZero())

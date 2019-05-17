@@ -23,7 +23,7 @@
                   "A": {"c": {"Value": {"k": "t", "t": "float", "v": 1.0} }, "k": "NT", "t": "Number"},
                   "B": {
                     "c": {
-                      "Exp": {"c": {"Name": {"k": "t", "t": "String", "v": "z"} }, "k": "NT", "t": "Var"}
+                      "A": {"c": {"Name": {"k": "t", "t": "String", "v": "z"} }, "k": "NT", "t": "Var"}
                     },
                     "k": "NT",
                     "t": "UnaryMinusExp"
